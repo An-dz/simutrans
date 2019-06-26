@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Simutrans
-Encoding=UTF-
+Encoding=UTF-8
 Comment=The best viewer for Foo objects available!
 TryExec=simutrans
 Exec=sinumtrans
