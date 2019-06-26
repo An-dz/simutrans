@@ -1,0 +1,25 @@
+env:
+  CIRRUS_CLONE_DEPTH: 1
+
+task:
+  container:
+    image: gcc:latest
+  dependency_script:
+    - apt-get update
+    - apt-get -y install zlib1g-dev libbz2-dev libfreetype6-dev libminiupnpc-dev autoconf
+  matrix:
+    - name: Linux SDL2 Build
+      build_script:
+        - apt-get -y install libsdl2-dev libsdl2-mixer-dev
+        - autoconf && ./configure
+        - make
+    - name: Linux POSIX Build
+      build_script:
+        - autoconf && ./configure
+        - make BACKEND=posix COLOUR_DEPTH=0
+    - name: Linux Makeobj Build
+      build_script:
+        - apt-get -y install libpng-dev pkg-config
+        - autoconf && ./configure
+        - cd makeobj
+        - make
