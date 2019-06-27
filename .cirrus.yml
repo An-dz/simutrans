@@ -2,24 +2,23 @@ env:
   CIRRUS_CLONE_DEPTH: 1
 
 task:
-  container:
-    image: gcc:latest
+  freebsd_instance:
+    image: freebsd-12-0-release-amd64
   dependency_script:
-    - apt-get update
-    - apt-get -y install zlib1g-dev libbz2-dev libfreetype6-dev libminiupnpc-dev autoconf
+    - pkg install -y gcc lzlib bzip2 freetype2 miniupnpc autoconf gmake
   matrix:
-    - name: Linux SDL2 Build
+    - name: FreeBSD SDL2 Build
       build_script:
-        - apt-get -y install libsdl2-dev libsdl2-mixer-dev
+        - pkg install -y sdl2 sdl2_mixer
         - autoconf && ./configure
-        - make
-    - name: Linux POSIX Build
+        - gmake
+    - name: FreeBSD Server Build
       build_script:
         - autoconf && ./configure
-        - make BACKEND=posix COLOUR_DEPTH=0
-    - name: Linux Makeobj Build
+        - gmake BACKEND=posix COLOUR_DEPTH=0
+    - name: FreeBSD Makeobj Build
       build_script:
-        - apt-get -y install libpng-dev pkg-config
+        - pkg install -y png pkgconf
         - autoconf && ./configure
         - cd makeobj
-        - make
+        - gmake
