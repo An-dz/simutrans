@@ -5,17 +5,17 @@ task:
   freebsd_instance:
     image: freebsd-12-0-release-amd64
   dependency_script:
-    - pkg install -y gcc lzlib bzip2 freetype2 miniupnpc autoconf gmake
+    - pkg install -y lzlib bzip2 autoconf gcc gmake
   matrix:
     - name: FreeBSD SDL2 Build
       build_script:
-        - pkg install -y sdl2 sdl2_mixer
+        - pkg install -y sdl2 sdl2_mixer freetype2 miniupnpc
         - autoconf && ./configure
         - gmake
     - name: FreeBSD Server Build
       build_script:
-        - autoconf && ./configure
-        - gmake BACKEND=posix COLOUR_DEPTH=0
+        - autoconf && ./configure --enable-server
+        - gmake
     - name: FreeBSD Makeobj Build
       build_script:
         - pkg install -y png pkgconf

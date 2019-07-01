@@ -1,7 +1,7 @@
 CFG ?= default
 -include ../config.$(CFG)
 
-OSTYPES       = beos cygwin freebsd haiku linux mingw mac
+OSTYPES = beos cygwin freebsd haiku linux mingw mac
 
 ifeq ($(findstring $(OSTYPE), $(OSTYPES)),)
   $(error Unkown OSTYPE "$(OSTYPE)", must be one of "$(OSTYPES)")
@@ -18,7 +18,7 @@ CFLAGS  += $(PNG_CFLAGS)
 LDFLAGS += $(PNG_LDFLAGS)
 
 # Absolutely essential
-CFLAGS += -DMAKEOBJ
+CFLAGS   += -DMAKEOBJ
 CXXFLAGS += -DMAKEOBJ
 
 STD_LIBS += -lz -lbz2 -lpng
@@ -30,15 +30,20 @@ ifeq ($(OSTYPE),cygwin)
 endif
 
 ifeq ($(OSTYPE),mingw)
-  OS_OPT   ?= -DPNG_STATIC -DZLIB_STATIC -march=pentium
+  OS_OPT  ?= -DPNG_STATIC -DZLIB_STATIC -march=pentium
   LDFLAGS += -static-libgcc -static-libstdc++ -static
   # we need the libraries EXACTLY in this order to link
   STD_LIBS = -lmingw32 -lpng -lz
 endif
 
 ifeq ($(OSTYPE),mac)
-  CFLAGS   += -DUSE_HW -DUSE_C  -Os -fast
-  CXXFLAGS   += -DUSE_HW -DUSE_C
+  CFLAGS   += -DUSE_HW -DUSE_C -Os -fast
+  CXXFLAGS += -DUSE_HW -DUSE_C
+endif
+
+ifeq ($(OSTYPE),freebsd)
+  CFLAGS   += -I/usr/local/include
+  CXXFLAGS += -I/usr/local/include
 endif
 
 ifdef OPTIMISE
@@ -46,7 +51,7 @@ ifdef OPTIMISE
     CFLAGS   += -O3 -fno-schedule-insns
     CXXFLAGS += -O3 -fno-schedule-insns
     ifneq ($(OSTYPE),mac)
-      CFLAGS  += -minline-all-stringops
+      CFLAGS += -minline-all-stringops
     endif
   endif
 else
@@ -68,7 +73,7 @@ ifdef DEBUG
     CXXFLAGS += -O0
   endif
 else
-  CFLAGS += -DNDEBUG
+  CFLAGS   += -DNDEBUG
   CXXFLAGS += -DNDEBUG
 endif
 
@@ -76,7 +81,7 @@ ifdef PROFILE
   ifeq ($(shell expr $(PROFILE) \>= 1), 1)
     CFLAGS   += -pg -DPROFILE -fno-inline
     CXXFLAGS += -pg -DPROFILE -fno-inline
-    LDFLAGS += -pg
+    LDFLAGS  += -pg
   endif
 endif
 
