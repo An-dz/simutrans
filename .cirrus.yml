@@ -10,9 +10,9 @@ task:
     CIRRUS_SHELL: powershell
   dependency_script:
     - echo "Hello There"
-    - $msys2 = Get-Location
+    - Get-Location
     # - $msys2 = (Get-Location).Drive.Root + "msys64"
-    - echo $msys2
+    # - echo $msys2
   #   - git clone -q --depth 1 https://github.com/msys2/msys2-ci-base.git $msys2
   #   - echo $env:PATH
   #   - $env:PATH = $msys2;$env:PATH
@@ -40,27 +40,3 @@ task:
   #       - autoconf && ./configure
   #       - cd makeobj
   #       - make
-
-# MacOS
-task:
-  osx_instance:
-    image: mojave-xcode-10.2
-  dependency_script:
-    - ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    - brew install autoconf
-  matrix:
-    - name: MacOS SDL2 Build
-      build_script:
-        - brew install sdl2 sdl2_mixer freetype miniupnpc
-        - autoconf && ./configure
-        - make
-    - name: MacOS Server Build
-      build_script:
-        - autoconf && ./configure --enable-server
-        - make
-    - name: MacOS Makeobj Build
-      build_script:
-        - brew install libpng pkg-config
-        - autoconf && ./configure
-        - cd makeobj
-        - make
