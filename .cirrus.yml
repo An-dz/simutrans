@@ -10,35 +10,36 @@ task:
     CIRRUS_SHELL: powershell
   dependency_script:
     - echo "Hello There"
-    - $msys2 = (Get-Location).Drive.Root + "msys64"
+    - $msys2 = Get-Location
+    # - $msys2 = (Get-Location).Drive.Root + "msys64"
     - echo $msys2
-    - git clone -q --depth 1 https://github.com/msys2/msys2-ci-base.git $msys2
-    - echo $env:PATH
-    - $env:PATH = $msys2;$env:PATH
-    - echo $env:PATH
-    - pacman -Syu --noconfirm --noprogressbar
-    - pacman -Su --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make
-  matrix:
-    - name: Windows MinGW SDL2 Build
-      build_script:
-        - pacman -S --noconfirm --noprogressbar mingw-w64-i686-SDL2 mingw-w64-i686-SDL2_mixer mingw-w64-i686-freetype mingw-w64-i686-miniupnpc
-        - autoconf && ./configure
-        - make
-    - name: Windows MinGW GDI Build
-      build_script:
-        - pacman -S --noconfirm --noprogressbar mingw-w64-i686-freetype mingw-w64-i686-miniupnpc
-        - autoconf && ./configure
-        - make
-    - name: Windows MinGW Server Build
-      build_script:
-        - autoconf && ./configure --enable-server
-        - make
-    - name: Windows MinGW Makeobj Build
-      build_script:
-        - pacman -S --noconfirm --noprogressbar mingw-w64-i686-libpng mingw-w64-i686-pkg-config
-        - autoconf && ./configure
-        - cd makeobj
-        - make
+  #   - git clone -q --depth 1 https://github.com/msys2/msys2-ci-base.git $msys2
+  #   - echo $env:PATH
+  #   - $env:PATH = $msys2;$env:PATH
+  #   - echo $env:PATH
+  #   - pacman -Syu --noconfirm --noprogressbar
+  #   - pacman -Su --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make
+  # matrix:
+  #   - name: Windows MinGW SDL2 Build
+  #     build_script:
+  #       - pacman -S --noconfirm --noprogressbar mingw-w64-i686-SDL2 mingw-w64-i686-SDL2_mixer mingw-w64-i686-freetype mingw-w64-i686-miniupnpc
+  #       - autoconf && ./configure
+  #       - make
+  #   - name: Windows MinGW GDI Build
+  #     build_script:
+  #       - pacman -S --noconfirm --noprogressbar mingw-w64-i686-freetype mingw-w64-i686-miniupnpc
+  #       - autoconf && ./configure
+  #       - make
+  #   - name: Windows MinGW Server Build
+  #     build_script:
+  #       - autoconf && ./configure --enable-server
+  #       - make
+  #   - name: Windows MinGW Makeobj Build
+  #     build_script:
+  #       - pacman -S --noconfirm --noprogressbar mingw-w64-i686-libpng mingw-w64-i686-pkg-config
+  #       - autoconf && ./configure
+  #       - cd makeobj
+  #       - make
 
 # MacOS
 task:

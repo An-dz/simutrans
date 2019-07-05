@@ -1,6 +1,6 @@
 simutrans.ac
 
-AC_INIT(simutrans, version-0.1)
+AC_INIT(simutrans, version-0.2)
 
 AC_PROG_CC
 AC_LANG(C++)
@@ -64,12 +64,17 @@ else
 	then
 		AC_LANG_PUSH(Objective C++)
 		AC_CHECK_HEADERS(AVFoundation/AVFoundation.h)
+		AC_CHECK_HEADERS(QTKit/QTMovie.h)
 		AC_LANG_POP(Objective C++)
-		if test "$ac_cv_header_avfoundation_avfoundation_h" == yes
+		if test "$ac_cv_header_AVFoundation_AVFoundation_h" == yes
 		then
 			AC_SUBST(av_foundation, 1)
 		else
 			AC_SUBST(av_foundation, 0)
+			if test "$ac_cv_header_QTKit_QTMovie_h" != yes
+			then
+				AC_MSG_ERROR([Neither AVFoundation nor QTKit are available as a sound driver. Simutrans will not compile!])
+			fi
 		fi
 		AC_SUBST(os_type, mac)
 	else
