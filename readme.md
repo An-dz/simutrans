@@ -1,5 +1,4 @@
-Simutrans
----------
+# Simutrans
 
 Simutrans is a transportation business simulator where the player can a
 transport passengers, mails and goods by many different transportation
@@ -8,12 +7,17 @@ options.
 Simutrans started in 1997. You can find more information about the game
 on our [official site](https://www.simutrans.com/).
 
-How to compile
---------------
+## Makeobj
+
+Makeobj is a command line tool to create new objects for Simutrans. It
+joins image and data files into a single optimised pak-file that can be
+used on Simutrans.
+
+# How to compile
 
 The instructions below expect that you at least know what the tools are
-and what they do as well as how to obtain the source code. They also
-only point to a bare-minimum for compiling.
+and what they do, as well as how to obtain the source code. They also
+only point to a minimum easy compiling and not the bare-minimum.
 
 ## Dependencies
 
@@ -42,7 +46,8 @@ For the recommended SDL2 back-end you need:
 SDL1 can also be used but it is deprecated.
 
 Allegro support is also available but it lacks maintenance:
-- liballeg <https://liballeg.org/>
+- liballeg <https://liballeg.org/>  
+  Not compatible with Allegro 5
 
 ### Optional
 
@@ -62,12 +67,10 @@ Make sure you have GNU make, GCC, autoconf and pkg-config installed as
 well and you can get it compiling with:
 
 ```sh
+autoconf
 ./configure
 make
 ```
-
-If the `./configure` command fails run `autoconf` and then repeat, it
-will generate the `configure` file and you won't need to run it again.
 
 ## Windows
 
@@ -106,7 +109,7 @@ installs the needed components for compiling with the command line.
 This option, like the MSYS2 option, can be used to work with Visual
 Studio Code or SublimeText.
 
-Follow the instruction from [Visual Studio](#Visual_Studio). They can
+Follow the instruction from [Visual Studio](#visual-studio). They can
 differ in some small points though.
 
 ### MSYS2 + MinGW
@@ -115,8 +118,10 @@ differ in some small points though.
 system for compiling on Windows with GCC. It's entirely used on the
 command line.
 
-You can install the [Dependencies](#Dependencies) with _pacman_, these
-are the name of the packages: (_libz_ and _libbz2_ are pre-installed)
+You can install the [Dependencies](#dependencies) with _pacman_, these
+are the name of the packages:
+- mingw-w64-i686-zlib
+- mingw-w64-i686-bzip2
 - mingw-w64-i686-SDL
 - mingw-w64-i686-SDL_mixer
 - mingw-w64-i686-SDL2
@@ -132,23 +137,46 @@ You'll also need the following installed:
 - mingw-w64-i686-pkg-config
 
 Once everything is installed you just compile as any GCC/make code with
-MinGW 32bits:
+MSYS2 MinGW 32bits:
 
 ```sh
+autoconf
 ./configure
 make
 ```
 
-If the `./configure` command fails run `autoconf` and then repeat, it
-will generate the `configure` file and you won't need to run it again.
-
 ## MacOS
 
-It's not recommended to compile with the GCC bundled with Xcode as it's too outdated.
+It's not recommended to compile with the GCC bundled with Xcode as it's
+too outdated and possibly Simutrans can't be compiled with it. Instead
+use Clang for compiling.
+
+The easiest option is to use [Homebrew](https://brew.sh/), a package
+manager for MacOS. The package names of the dependencies are:
+- sdl2
+- sdl2_mixer
+- freetype
+- miniupnpc
+- libpng
+
+zlib and bzip2 are already installed so installing the brew version is only for using a more up-to-date version. You'll have to manually edit
+the build to use these newer versions of the lib.
+
+Other packages you'll need are:
+- autoconf
+- pkg-config
+
+Then you can just call these to start compiling:
+
+```sh
+autoconf
+./configure
+make
+```
 
 ## FreeBSD
 
-You can install all [Dependencies](#Dependencies) with FreeBSD package
+You can install all [Dependencies](#dependencies) with FreeBSD package
 manager _pkg_. The name of the packages are:
 - lzlib
 - bzip2
@@ -167,18 +195,16 @@ Along with the dependencies listed above you'll also need:
 Here are the commands to run from inside the Simutrans directory:
 
 ```sh
+autoconf
 ./configure
 gmake
 ```
 
-If the `./configure` command fails run `autoconf` and then repeat, it
-will generate the `configure` file and you won't need to run it again.
-
 ## Server
 
 If you want to compile Simutrans as a command line tool, for hosting a
-server without graphical back-end, just call `configure` with
-`--enable-server`.
+server without graphical back-end, with GCC just call `configure` with
+`--enable-server`. For Visual Studio use the _Simutrans-server.sln_ file.
 
 
 Congratulations, you checked out the simutrans source. To compile it,
