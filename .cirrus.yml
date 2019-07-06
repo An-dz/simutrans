@@ -5,7 +5,6 @@ env:
 task:
   windows_container:
     image: cirrusci/windowsservercore:2019
-    os_version: 2019
   env:
     CIRRUS_SHELL: powershell
   dependency_script:
