@@ -10,13 +10,14 @@ task:
     CIRRUS_SHELL: powershell
   dependency_script:
     - echo "Hello There"
-    - Get-Location
+    # - Get-Location
     # - $msys2 = (Get-Location).Drive.Root + "msys64"
     # - echo $msys2
   #   - git clone -q --depth 1 https://github.com/msys2/msys2-ci-base.git $msys2
-  #   - echo $env:PATH
-  #   - $env:PATH = $msys2;$env:PATH
-  #   - echo $env:PATH
+    - echo $env:PATH
+    - $msys2 = "msys64"
+    - $env:PATH = $msys2;$env:PATH
+    - echo $env:PATH
   #   - pacman -Syu --noconfirm --noprogressbar
   #   - pacman -Su --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make
   # matrix:
