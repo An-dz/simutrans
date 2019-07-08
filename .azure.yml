@@ -51,7 +51,7 @@ jobs:
       - checkout: self
         fetchDepth: 1
       - script: |
-          sudo apt-get udpate
+          sudo apt-get update
           sudo apt-get -qq install zlib1g-dev libbz2-dev autoconf libsdl2-dev libsdl2-mixer-dev libfreetype6-dev libminiupnpc-dev
         displayName: Install Dependencies
       - script: |
@@ -68,7 +68,7 @@ jobs:
       - checkout: self
         fetchDepth: 1
       - script: |
-          sudo apt-get udpate
+          sudo apt-get update
           sudo apt-get -qq install zlib1g-dev libbz2-dev autoconf
         displayName: Install Dependencies
       - script: |
@@ -85,7 +85,7 @@ jobs:
       - checkout: self
         fetchDepth: 1
       - script: |
-          sudo apt-get udpate
+          sudo apt-get update
           sudo apt-get -qq install zlib1g-dev libbz2-dev autoconf libpng-dev pkg-config
         displayName: Install Dependencies
       - script: |
@@ -108,8 +108,8 @@ jobs:
           $msys2 = (Get-Location).Drive.Root + "msys64"
           git clone --depth 1 https://github.com/msys2/msys2-ci-base.git $msys2
           $env:PATH = "$msys2\usr\bin;$env:PATH"
-          pacman -Syu --noconfirm --noprogressbar
-          pacman -Syu --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make mingw-w64-i686-freetype mingw-w64-i686-miniupnpc
+          pacman -Syyu --noconfirm --noprogressbar
+          pacman -Su --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make mingw-w64-i686-freetype mingw-w64-i686-miniupnpc
         displayName: Install Dependencies
       - pwsh: |
           autoconf
@@ -128,8 +128,8 @@ jobs:
           $msys2 = (Get-Location).Drive.Root + "msys64"
           git clone --depth 1 https://github.com/msys2/msys2-ci-base.git $msys2
           $env:PATH = "$msys2\usr\bin;$env:PATH"
-          pacman -Syu --noconfirm --noprogressbar
-          pacman -Syu --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make mingw-w64-i686-SDL2 mingw-w64-i686-SDL2_mixer mingw-w64-i686-freetype mingw-w64-i686-miniupnpc
+          pacman -Syyu --noconfirm --noprogressbar
+          pacman -Su --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make mingw-w64-i686-SDL2 mingw-w64-i686-SDL2_mixer mingw-w64-i686-freetype mingw-w64-i686-miniupnpc
         displayName: Install Dependencies
       - pwsh: |
           autoconf
@@ -148,8 +148,8 @@ jobs:
           $msys2 = (Get-Location).Drive.Root + "msys64"
           git clone --depth 1 https://github.com/msys2/msys2-ci-base.git $msys2
           $env:PATH = "$msys2\usr\bin;$env:PATH"
-          pacman -Syu --noconfirm --noprogressbar
-          pacman -Syu --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make
+          pacman -Syyu --noconfirm --noprogressbar
+          pacman -Su --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make
         displayName: Install Dependencies
       - pwsh: |
           autoconf
@@ -168,8 +168,8 @@ jobs:
           $msys2 = (Get-Location).Drive.Root + "msys64"
           git clone --depth 1 https://github.com/msys2/msys2-ci-base.git $msys2
           $env:PATH = "$msys2\usr\bin;$env:PATH"
-          pacman -Syu --noconfirm --noprogressbar
-          pacman -Syu --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make mingw-w64-i686-libpng mingw-w64-i686-pkg-config
+          pacman -Syyu --noconfirm --noprogressbar
+          pacman -Su --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make mingw-w64-i686-libpng mingw-w64-i686-pkg-config
         displayName: Install Dependencies
       - pwsh: |
           autoconf
