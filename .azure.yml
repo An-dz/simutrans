@@ -109,7 +109,6 @@ jobs:
           git clone --depth 1 https://github.com/msys2/msys2-ci-base.git $msys2
           $env:PATH = "$msys2\usr\bin;$env:PATH"
           pacman -Syyu --noconfirm --noprogressbar
-          pacman -Su --noconfirm --noprogressbar
         displayName: Install MSYS2
       - pwsh: |
           $msys2 = (Get-Location).Drive.Root + "msys64"
@@ -119,9 +118,7 @@ jobs:
       - bash: |
           msys2=$PWD | grep -o -E "^\/?\w+\/"
           PATH="$msys2/usr/bin;$msys2/mingw32/bin;$PATH"
-          bash autoconf
-          bash ./configure
-          make
+          bash autoconf && bash ./configure && make
         displayName: Build
 
   - job:
