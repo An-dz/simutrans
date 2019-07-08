@@ -116,6 +116,8 @@ jobs:
           pacman -Su --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make mingw-w64-i686-freetype mingw-w64-i686-miniupnpc
         displayName: Install Dependencies
       - pwsh: |
+          $msys2 = (Get-Location).Drive.Root + "msys64"
+          $env:PATH = "$msys2\usr\bin;$env:PATH"
           autoconf
           ./configure
           make
@@ -140,6 +142,8 @@ jobs:
           pacman -Su --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make mingw-w64-i686-SDL2 mingw-w64-i686-SDL2_mixer mingw-w64-i686-freetype mingw-w64-i686-miniupnpc
         displayName: Install Dependencies
       - pwsh: |
+          $msys2 = (Get-Location).Drive.Root + "msys64"
+          $env:PATH = "$msys2\usr\bin;$env:PATH"
           autoconf
           ./configure
           make
@@ -164,6 +168,8 @@ jobs:
           pacman -Su --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make
         displayName: Install Dependencies
       - pwsh: |
+          $msys2 = (Get-Location).Drive.Root + "msys64"
+          $env:PATH = "$msys2\usr\bin;$env:PATH"
           autoconf
           ./configure --enable-server
           make
@@ -188,6 +194,8 @@ jobs:
           pacman -Su --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make mingw-w64-i686-libpng mingw-w64-i686-pkg-config
         displayName: Install Dependencies
       - pwsh: |
+          $msys2 = (Get-Location).Drive.Root + "msys64"
+          $env:PATH = "$msys2\usr\bin;$env:PATH"
           autoconf
           ./configure
           cd makeobj
