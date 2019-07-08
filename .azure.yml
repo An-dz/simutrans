@@ -44,7 +44,8 @@ jobs:
   # Linux GCC
   ###############################################
   - job:
-    pool: 'ubuntu-latest'
+    pool:
+      vmImage: 'ubuntu-latest'
     displayName: Linux SDL2 Build
     steps:
       - checkout: self
@@ -60,7 +61,8 @@ jobs:
         displayName: Build
 
   - job:
-    pool: 'ubuntu-latest'
+    pool:
+      vmImage: 'ubuntu-latest'
     displayName: Linux Server Build
     steps:
       - checkout: self
@@ -76,7 +78,8 @@ jobs:
         displayName: Build
 
   - job:
-    pool: 'ubuntu-latest'
+    pool:
+      vmImage: 'ubuntu-latest'
     displayName: Linux Makeobj Build
     steps:
       - checkout: self
@@ -95,7 +98,8 @@ jobs:
   # Windows MinGW GCC
   ###############################################
   - job:
-    pool: 'windows-latest'
+    pool:
+      vmImage: 'windows-latest'
     displayName: Windows MinGW GDI Build
     steps:
       - checkout: self
@@ -114,7 +118,8 @@ jobs:
         displayName: Build
 
   - job:
-    pool: 'windows-latest'
+    pool:
+      vmImage: 'windows-latest'
     displayName: Windows MinGW SDL2 Build
     steps:
       - checkout: self
@@ -133,7 +138,8 @@ jobs:
         displayName: Build
 
   - job:
-    pool: 'windows-latest'
+    pool:
+      vmImage: 'windows-latest'
     displayName: Windows MinGW Server Build
     steps:
       - checkout: self
@@ -152,7 +158,8 @@ jobs:
         displayName: Build
 
   - job:
-    pool: 'windows-latest'
+    pool:
+      vmImage: 'windows-latest'
     displayName: Windows MinGW Makeobj Build
     steps:
       - checkout: self
@@ -177,7 +184,8 @@ jobs:
   # MacOS Homebrew Clang
   ###############################################
   - job:
-    pool: 'macos-latest'
+    pool:
+      vmImage: 'macos-latest'
     displayName: MacOS SDL2 Build
     steps:
       - checkout: self
@@ -192,7 +200,8 @@ jobs:
         displayName: Build
 
   - job:
-    pool: 'macos-latest'
+    pool:
+      vmImage: 'macos-latest'
     displayName: MacOS Server Build
     steps:
       - checkout: self
@@ -207,7 +216,8 @@ jobs:
         displayName: Build
 
   - job:
-    pool: 'macos-latest'
+    pool:
+      vmImage: 'macos-latest'
     displayName: MacOS Makeobj Build
     steps:
       - checkout: self
