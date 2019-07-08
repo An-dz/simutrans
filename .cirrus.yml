@@ -3,12 +3,11 @@
 env:
   CIRRUS_CLONE_DEPTH: 1
 
-only_if: $CIRRUS_BRANCH == 'master'
-
-# There's no need to compile if no source files were changed
-skip: "!changesInclude('.cirrus.yml', '*.cc', '*.c', '*.h', 'Makefile', '*.mk', 'configure.ac', 'config.default.in')"
 
 task:
+  only_if: $CIRRUS_BRANCH == 'master'
+  # There's no need to compile if no source files were changed
+  skip: "!changesInclude('.cirrus.yml', '*.cc', '*.c', '*.h', 'Makefile', '*.mk', 'configure.ac', 'config.default.in')"
   freebsd_instance:
     image: freebsd-12-0-release-amd64
   dependency_script:
