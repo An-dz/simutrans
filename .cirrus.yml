@@ -1,0 +1,34 @@
+env:
+  CIRRUS_CLONE_DEPTH: 1
+
+only_if: $CIRRUS_BRANCH == 'master'
+
+# There's no need to compile if no source files were changed
+compile_check: &COMPILE_CHECK
+  skip: "!changesInclude('.cirrus.yml', '*.cc', '*.c', '*.h', 'Makefile', '*.mk', 'configure.ac', 'config.default.in')"
+
+# FreeBSD
+task:
+  freebsd_instance:
+    image: freebsd-12-0-release-amd64
+  dependency_script:
+    - pkg install -y lzlib bzip2 autoconf gcc gmake
+  matrix:
+    - name: FreeBSD SDL2 Build
+      << : *COMPILE_CHECK
+      build_script:
+        - pkg install -y sdl2 sdl2_mixer freetype2 miniupnpc
+        - autoconf && ./configure
+        - gmake
+    - name: FreeBSD Server Build
+      << : *COMPILE_CHECK
+      build_script:
+        - autoconf && ./configure --enable-server
+        - gmake
+    - name: FreeBSD Makeobj Build
+      only_if: "changesInclude('.cirrus.yml', 'makeobj/*', 'descriptor/writer/*', 'utils/dr_rdpng.cc', 'utils/log.cc', 'descriptor/image.cc', 'dataobj/freelist.cc', 'dataobj/tabfile.cc', 'simdebug.cc', 'simmem.cc', 'utils/simstring.cc', 'utils/searchfolder.cc')"
+      build_script:
+        - pkg install -y png pkgconf
+        - autoconf && ./configure
+        - cd makeobj
+        - gmake
