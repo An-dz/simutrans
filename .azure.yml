@@ -105,7 +105,9 @@ jobs:
       - checkout: self
         fetchDepth: 1
       - pwsh: |
-          choco install msys2
+          choco install msys2 -r -y
+        displayName: Install MSYS2
+      - pwsh: |
           pacman -Su --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make mingw-w64-i686-freetype mingw-w64-i686-miniupnpc
         displayName: Install Dependencies
       - pwsh: |
@@ -122,7 +124,9 @@ jobs:
       - checkout: self
         fetchDepth: 1
       - pwsh: |
-          choco install msys2
+          choco install msys2 -r -y
+        displayName: Install MSYS2
+      - pwsh: |
           pacman -Su --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make mingw-w64-i686-SDL2 mingw-w64-i686-SDL2_mixer mingw-w64-i686-freetype mingw-w64-i686-miniupnpc
         displayName: Install Dependencies
       - pwsh: |
@@ -139,7 +143,9 @@ jobs:
       - checkout: self
         fetchDepth: 1
       - pwsh: |
-          choco install msys2
+          choco install msys2 -r -y
+        displayName: Install MSYS2
+      - pwsh: |
           pacman -Su --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make
         displayName: Install Dependencies
       - pwsh: |
@@ -156,7 +162,9 @@ jobs:
       - checkout: self
         fetchDepth: 1
       - pwsh: |
-          choco install msys2
+          choco install msys2 -r -y
+        displayName: Install MSYS2
+      - pwsh: |
           pacman -Su --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make mingw-w64-i686-libpng mingw-w64-i686-pkg-config
         displayName: Install Dependencies
       - pwsh: |
