@@ -118,7 +118,7 @@ jobs:
       - pwsh: |
           $msys2 = (Get-Location).Drive.Root + "msys64"
           $env:PATH = "$msys2\usr\bin;$msys2\mingw32\bin;$env:PATH"
-          bash autoconf && bash ./configure && make
+          bash autoconf; bash ./configure; make
         displayName: Build
 
   - job:
@@ -167,7 +167,7 @@ jobs:
         displayName: Install Dependencies
       - pwsh: |
           $msys2 = (Get-Location).Drive.Root + "msys64"
-          $env:PATH = "$msys2\usr\bin;$env:PATH"
+          $env:PATH = "$msys2\usr\bin;$msys2\mingw32\bin;$env:PATH"
           bash autoconf
           bash ./configure --enable-server
           make
@@ -193,7 +193,7 @@ jobs:
         displayName: Install Dependencies
       - pwsh: |
           $msys2 = (Get-Location).Drive.Root + "msys64"
-          $env:PATH = "$msys2\usr\bin;$env:PATH"
+          $env:PATH = "$msys2\usr\bin;$msys2\mingw32\bin;$env:PATH"
           bash autoconf
           bash ./configure
           cd makeobj
@@ -202,6 +202,110 @@ jobs:
 
   # Windows Visual Studio
   ###############################################
+  - job:
+    pool:
+      vmImage: 'windows-latest'
+    displayName: Windows MSVC GDI Build
+    steps:
+      - checkout: self
+        fetchDepth: 1
+      - pwsh: |
+          $msys2 = (Get-Location).Drive.Root + "msys64"
+          git clone --depth 1 https://github.com/msys2/msys2-ci-base.git $msys2
+          $env:PATH = "$msys2\usr\bin;$env:PATH"
+          pacman -Syyu --noconfirm --noprogressbar
+        displayName: Install MSYS2
+      - pwsh: |
+          $msys2 = (Get-Location).Drive.Root + "msys64"
+          $env:PATH = "$msys2\usr\bin;$env:PATH"
+          pacman -Su --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make mingw-w64-i686-freetype mingw-w64-i686-miniupnpc
+        displayName: Install Dependencies
+      - pwsh: |
+          $msys2 = (Get-Location).Drive.Root + "msys64"
+          $env:PATH = "$msys2\usr\bin;$msys2\mingw32\bin;$env:PATH"
+          bash autoconf
+          bash ./configure
+          make
+        displayName: Build
+
+  - job:
+    pool:
+      vmImage: 'windows-latest'
+    displayName: Windows MSVC SDL2 Build
+    steps:
+      - checkout: self
+        fetchDepth: 1
+      - pwsh: |
+          $msys2 = (Get-Location).Drive.Root + "msys64"
+          git clone --depth 1 https://github.com/msys2/msys2-ci-base.git $msys2
+          $env:PATH = "$msys2\usr\bin;$env:PATH"
+          pacman -Syyu --noconfirm --noprogressbar
+        displayName: Install MSYS2
+      - pwsh: |
+          $msys2 = (Get-Location).Drive.Root + "msys64"
+          $env:PATH = "$msys2\usr\bin;$env:PATH"
+          pacman -Su --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make mingw-w64-i686-SDL2 mingw-w64-i686-SDL2_mixer mingw-w64-i686-freetype mingw-w64-i686-miniupnpc
+        displayName: Install Dependencies
+      - pwsh: |
+          $msys2 = (Get-Location).Drive.Root + "msys64"
+          $env:PATH = "$msys2\usr\bin;$msys2\mingw32\bin;$env:PATH"
+          bash autoconf
+          bash ./configure
+          make
+        displayName: Build
+
+  - job:
+    pool:
+      vmImage: 'windows-latest'
+    displayName: Windows MSVC Server Build
+    steps:
+      - checkout: self
+        fetchDepth: 1
+      - pwsh: |
+          $msys2 = (Get-Location).Drive.Root + "msys64"
+          git clone --depth 1 https://github.com/msys2/msys2-ci-base.git $msys2
+          $env:PATH = "$msys2\usr\bin;$env:PATH"
+          pacman -Syyu --noconfirm --noprogressbar
+        displayName: Install MSYS2
+      - pwsh: |
+          $msys2 = (Get-Location).Drive.Root + "msys64"
+          $env:PATH = "$msys2\usr\bin;$env:PATH"
+          pacman -Su --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make
+        displayName: Install Dependencies
+      - pwsh: |
+          $msys2 = (Get-Location).Drive.Root + "msys64"
+          $env:PATH = "$msys2\usr\bin;$msys2\mingw32\bin;$env:PATH"
+          bash autoconf
+          bash ./configure --enable-server
+          make
+        displayName: Build
+
+  - job:
+    pool:
+      vmImage: 'windows-latest'
+    displayName: Windows MSVC Makeobj Build
+    steps:
+      - checkout: self
+        fetchDepth: 1
+      - pwsh: |
+          $msys2 = (Get-Location).Drive.Root + "msys64"
+          git clone --depth 1 https://github.com/msys2/msys2-ci-base.git $msys2
+          $env:PATH = "$msys2\usr\bin;$env:PATH"
+          pacman -Syyu --noconfirm --noprogressbar
+        displayName: Install MSYS2
+      - pwsh: |
+          $msys2 = (Get-Location).Drive.Root + "msys64"
+          $env:PATH = "$msys2\usr\bin;$env:PATH"
+          pacman -Su --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make mingw-w64-i686-libpng mingw-w64-i686-pkg-config
+        displayName: Install Dependencies
+      - pwsh: |
+          $msys2 = (Get-Location).Drive.Root + "msys64"
+          $env:PATH = "$msys2\usr\bin;$msys2\mingw32\bin;$env:PATH"
+          bash autoconf
+          bash ./configure
+          cd makeobj
+          make
+        displayName: Build
 
   # MacOS Homebrew Clang
   ###############################################
