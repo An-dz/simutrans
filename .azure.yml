@@ -115,9 +115,9 @@ jobs:
           $env:PATH = "$msys2\usr\bin;$env:PATH"
           pacman -Su --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make mingw-w64-i686-freetype mingw-w64-i686-miniupnpc
         displayName: Install Dependencies
-      - bash: |
-          msys2=$PWD | grep -o -E "^\/?\w+\/"
-          PATH="$msys2/usr/bin;$msys2/mingw32/bin;$PATH"
+      - pwsh: |
+          $msys2 = (Get-Location).Drive.Root + "msys64"
+          $env:PATH = "$msys2\usr\bin;$msys2\mingw32\bin;$env:PATH"
           bash autoconf && bash ./configure && make
         displayName: Build
 
