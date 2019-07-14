@@ -17,14 +17,14 @@ task:
       build_script:
         - pkg install -y sdl2 sdl2_mixer freetype2 miniupnpc
         - autoconf && ./configure
-        - gmake
+        - gmake -j
     - name: FreeBSD Server Build
       build_script:
         - autoconf && ./configure --enable-server
-        - gmake
+        - gmake -j
     - name: FreeBSD Makeobj Build
       build_script:
         - pkg install -y png pkgconf
         - autoconf && ./configure
         - cd makeobj
-        - gmake
+        - gmake -j
