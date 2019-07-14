@@ -169,8 +169,7 @@ jobs:
           platform: 'x86'
           configuration: 'Release'
           timeoutInMinutes: 20
-          logFileVerbosity: diagnostic
-          msbuildArgs: '/p:IncludePath=\"$(SolutionDir)include;$(IncludePath)\";LibraryPath=\"$(SolutionDir)lib/release;$(LibraryPath)\"'
+          msbuildArgs: '/p:IncludePath=$(SolutionDir)include;$(IncludePath) /p:LibraryPath=$(SolutionDir)lib/release;$(LibraryPath) /v:diag'
 
   - job:
     pool:
@@ -193,8 +192,7 @@ jobs:
           platform: 'x86'
           configuration: 'Release'
           timeoutInMinutes: 20
-          logFileVerbosity: diagnostic
-          msbuildArgs: '/p:IncludePath="$(SolutionDir)include%3B$(IncludePath)";LibraryPath="$(SolutionDir)lib/release%3B$(LibraryPath)"'
+          msbuildArgs: '/p:IncludePath=$(SolutionDir)include;$(IncludePath) /p:LibraryPath=$(SolutionDir)lib/release;$(LibraryPath) /v:diag'
 
   - job:
     pool:
@@ -217,8 +215,7 @@ jobs:
           platform: 'x86'
           configuration: 'Release'
           timeoutInMinutes: 20
-          logFileVerbosity: diagnostic
-          msbuildArgs: '/p:IncludePath="$(SolutionDir)include%3B$(IncludePath)";LibraryPath="$(SolutionDir)lib/release%3B$(LibraryPath)"'
+          msbuildArgs: '/p:IncludePath=$(SolutionDir)include;$(IncludePath) /p:LibraryPath=$(SolutionDir)lib/release;$(LibraryPath) /v:diag'
 
   - job:
     pool:
@@ -241,8 +238,7 @@ jobs:
           platform: 'x86'
           configuration: 'Release'
           timeoutInMinutes: 20
-          logFileVerbosity: diagnostic
-          msbuildArgs: '/p:IncludePath="$(SolutionDir)include;$(IncludePath)";LibraryPath="$(SolutionDir)lib/release;$(LibraryPath)"'
+          msbuildArgs: '/p:IncludePath=$(SolutionDir)include;$(IncludePath) /p:LibraryPath=$(SolutionDir)lib/release;$(LibraryPath) /v:diag'
 
   # Windows MinGW GCC
   ###############################################
