@@ -169,7 +169,7 @@ jobs:
           platform: 'x86'
           configuration: 'Release'
           timeoutInMinutes: 20
-          msbuildArgs: '/p:IncludePath="$(Get-Location)\include;$env:INCLUDE" /p:LibraryPath="$(Get-Location)\lib\release;$env:LIB" /v:diag'
+          msbuildArgs: '/p:IncludePath="%CD%\include;%INCLUDE%" /p:LibraryPath="%CD%\lib\release;%LIB%" /v:diag'
 
   - job:
     pool:
@@ -192,7 +192,7 @@ jobs:
           platform: 'x86'
           configuration: 'Release'
           timeoutInMinutes: 20
-          msbuildArgs: '/p:IncludePath="$(Get-Location)\include;$env:INCLUDE" /p:LibraryPath="$(Get-Location)\lib\release;$env:LIB" /v:diag'
+          msbuildArgs: '/p:IncludePath="%CD%\include;%INCLUDE%" /p:LibraryPath="%CD%\lib\release;%LIB%" /v:diag'
 
   - job:
     pool:
@@ -215,7 +215,7 @@ jobs:
           platform: 'x86'
           configuration: 'Release'
           timeoutInMinutes: 20
-          msbuildArgs: '/p:IncludePath="$(Get-Location)\include;$env:INCLUDE" /p:LibraryPath="$(Get-Location)\lib\release;$env:LIB" /v:diag'
+          msbuildArgs: '/p:IncludePath="%CD%\include;%INCLUDE%" /p:LibraryPath="%CD%\lib\release;%LIB%" /v:diag'
 
   - job:
     pool:
@@ -238,7 +238,7 @@ jobs:
           platform: 'x86'
           configuration: 'Release'
           timeoutInMinutes: 20
-          msbuildArgs: '/p:IncludePath="$(Get-Location)\include;$env:INCLUDE" /p:LibraryPath="$(Get-Location)\lib\release;$env:LIB" /v:diag'
+          msbuildArgs: '/p:IncludePath="%CD%\include;%INCLUDE%" /p:LibraryPath="%CD%\lib\release;%LIB%" /v:diag'
 
   # Windows MinGW GCC
   ###############################################
@@ -252,17 +252,17 @@ jobs:
   #     - pwsh: |
   #         $msys2 = (Get-Location).Drive.Root + "msys64"
   #         git clone --depth 1 https://github.com/msys2/msys2-ci-base.git $msys2
-  #         $env:PATH = "$msys2\usr\bin;$env:PATH"
+  #         %PATH% = "$msys2\usr\bin;%PATH%"
   #         pacman -Syyu --noconfirm --noprogressbar
   #       displayName: Install MSYS2
   #     - pwsh: |
   #         $msys2 = (Get-Location).Drive.Root + "msys64"
-  #         $env:PATH = "$msys2\usr\bin;$env:PATH"
+  #         %PATH% = "$msys2\usr\bin;%PATH%"
   #         pacman -Su --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make mingw-w64-i686-freetype mingw-w64-i686-miniupnpc
   #       displayName: Install Dependencies
   #     - pwsh: |
   #         $msys2 = (Get-Location).Drive.Root + "msys64"
-  #         $env:PATH = "$msys2\usr\bin;$msys2\mingw32\bin;$env:PATH"
+  #         %PATH% = "$msys2\usr\bin;$msys2\mingw32\bin;%PATH%"
   #         bash autoconf; bash ./configure; make
   #       displayName: Build
 
@@ -276,17 +276,17 @@ jobs:
   #     - pwsh: |
   #         $msys2 = (Get-Location).Drive.Root + "msys64"
   #         git clone --depth 1 https://github.com/msys2/msys2-ci-base.git $msys2
-  #         $env:PATH = "$msys2\usr\bin;$env:PATH"
+  #         %PATH% = "$msys2\usr\bin;%PATH%"
   #         pacman -Syyu --noconfirm --noprogressbar
   #       displayName: Install MSYS2
   #     - pwsh: |
   #         $msys2 = (Get-Location).Drive.Root + "msys64"
-  #         $env:PATH = "$msys2\usr\bin;$env:PATH"
+  #         %PATH% = "$msys2\usr\bin;%PATH%"
   #         pacman -Su --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make mingw-w64-i686-SDL2 mingw-w64-i686-SDL2_mixer mingw-w64-i686-freetype mingw-w64-i686-miniupnpc
   #       displayName: Install Dependencies
   #     - pwsh: |
   #         $msys2 = (Get-Location).Drive.Root + "msys64"
-  #         $env:PATH = "$msys2\usr\bin;$msys2\mingw32\bin;$env:PATH"
+  #         %PATH% = "$msys2\usr\bin;$msys2\mingw32\bin;%PATH%"
   #         bash autoconf
   #         bash ./configure
   #         make
@@ -302,17 +302,17 @@ jobs:
   #     - pwsh: |
   #         $msys2 = (Get-Location).Drive.Root + "msys64"
   #         git clone --depth 1 https://github.com/msys2/msys2-ci-base.git $msys2
-  #         $env:PATH = "$msys2\usr\bin;$env:PATH"
+  #         %PATH% = "$msys2\usr\bin;%PATH%"
   #         pacman -Syyu --noconfirm --noprogressbar
   #       displayName: Install MSYS2
   #     - pwsh: |
   #         $msys2 = (Get-Location).Drive.Root + "msys64"
-  #         $env:PATH = "$msys2\usr\bin;$env:PATH"
+  #         %PATH% = "$msys2\usr\bin;%PATH%"
   #         pacman -Su --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make
   #       displayName: Install Dependencies
   #     - pwsh: |
   #         $msys2 = (Get-Location).Drive.Root + "msys64"
-  #         $env:PATH = "$msys2\usr\bin;$msys2\mingw32\bin;$env:PATH"
+  #         %PATH% = "$msys2\usr\bin;$msys2\mingw32\bin;%PATH%"
   #         bash autoconf
   #         bash ./configure --enable-server
   #         make
@@ -328,17 +328,17 @@ jobs:
   #     - pwsh: |
   #         $msys2 = (Get-Location).Drive.Root + "msys64"
   #         git clone --depth 1 https://github.com/msys2/msys2-ci-base.git $msys2
-  #         $env:PATH = "$msys2\usr\bin;$env:PATH"
+  #         %PATH% = "$msys2\usr\bin;%PATH%"
   #         pacman -Syyu --noconfirm --noprogressbar
   #       displayName: Install MSYS2
   #     - pwsh: |
   #         $msys2 = (Get-Location).Drive.Root + "msys64"
-  #         $env:PATH = "$msys2\usr\bin;$env:PATH"
+  #         %PATH% = "$msys2\usr\bin;%PATH%"
   #         pacman -Su --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make mingw-w64-i686-libpng mingw-w64-i686-pkg-config
   #       displayName: Install Dependencies
   #     - pwsh: |
   #         $msys2 = (Get-Location).Drive.Root + "msys64"
-  #         $env:PATH = "$msys2\usr\bin;$msys2\mingw32\bin;$env:PATH"
+  #         %PATH% = "$msys2\usr\bin;$msys2\mingw32\bin;%PATH%"
   #         bash autoconf
   #         bash ./configure
   #         cd makeobj
