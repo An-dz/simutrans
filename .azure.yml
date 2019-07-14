@@ -168,8 +168,11 @@ jobs:
           solution: 'Simutrans-GDI.vcxproj'
           platform: 'x86'
           configuration: 'Release'
+          env:
+            INCLUDE: 'include;$env:INCLUDE'
+            LIB: 'lib\release;$env:LIB'
           timeoutInMinutes: 20
-          msbuildArgs: '/p:IncludePath="%CD%\include;%INCLUDE%" /p:LibraryPath="%CD%\lib\release;%LIB%" /v:diag'
+          msbuildArgs: '/v:diag'
 
   - job:
     pool:
@@ -191,8 +194,11 @@ jobs:
           solution: 'Simutrans-SDL2.vcxproj'
           platform: 'x86'
           configuration: 'Release'
+          env:
+            INCLUDE: 'include;$env:INCLUDE'
+            LIB: 'lib\release;$env:LIB'
           timeoutInMinutes: 20
-          msbuildArgs: '/p:IncludePath="%CD%\include;%INCLUDE%" /p:LibraryPath="%CD%\lib\release;%LIB%" /v:diag'
+          msbuildArgs: '/v:diag'
 
   - job:
     pool:
@@ -214,8 +220,11 @@ jobs:
           solution: 'Simutrans-Server.vcxproj'
           platform: 'x86'
           configuration: 'Release'
+          env:
+            INCLUDE: 'include;$env:INCLUDE'
+            LIB: 'lib\release;$env:LIB'
           timeoutInMinutes: 20
-          msbuildArgs: '/p:IncludePath="%CD%\include;%INCLUDE%" /p:LibraryPath="%CD%\lib\release;%LIB%" /v:diag'
+          msbuildArgs: '/v:diag'
 
   - job:
     pool:
@@ -237,8 +246,11 @@ jobs:
           solution: 'makeobj/Makeobj.sln'
           platform: 'x86'
           configuration: 'Release'
+          env:
+            INCLUDE: 'include;$env:INCLUDE'
+            LIB: 'lib\release;$env:LIB'
           timeoutInMinutes: 20
-          msbuildArgs: '/p:IncludePath="%CD%\include;%INCLUDE%" /p:LibraryPath="%CD%\lib\release;%LIB%" /v:diag'
+          msbuildArgs: '/v:diag'
 
   # Windows MinGW GCC
   ###############################################
