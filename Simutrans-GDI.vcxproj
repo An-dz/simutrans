@@ -15,9 +15,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{E74757E8-C2FD-44AD-87BD-3D55F4709484}</ProjectGuid>
+    <ProjectGuid>{0621B295-BEB7-4767-82F1-F27995610323}</ProjectGuid>
     <RootNamespace>Simutrans</RootNamespace>
-    <ProjectName>Simutrans SDL2</ProjectName>
+    <ProjectName>Simutrans GDI</ProjectName>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -73,7 +73,7 @@
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>SDL2main.lib;SDL2.lib;kernel32.lib;user32.lib;shell32.lib;winmm.lib;zlibstat.lib;advapi32.lib;ws2_32.lib;imm32.lib;libbz2.lib;libpthreadVC3d.lib;miniupnpc.lib;freetype.lib</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;shell32.lib;winmm.lib;zlibstat.lib;advapi32.lib;ws2_32.lib;imm32.lib;libbz2.lib;libpthreadVC3d.lib;miniupnpc.lib;freetype.lib</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
@@ -107,17 +107,17 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>SDL2main.lib;SDL2.lib;kernel32.lib;user32.lib;shell32.lib;winmm.lib;zlibstat.lib;advapi32.lib;ws2_32.lib;imm32.lib;libbz2.lib;libpthreadVC3.lib;miniupnpc.lib;freetype.lib</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;shell32.lib;winmm.lib;zlibstat.lib;advapi32.lib;ws2_32.lib;imm32.lib;libbz2.lib;libpthreadVC3.lib;miniupnpc.lib;freetype.lib</AdditionalDependencies>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="clipboard_s2.cc" />
-    <ClCompile Include="simsys_s2.cc" />
+    <ClCompile Include="clipboard_w32.cc" />
+    <ClCompile Include="simsys_w.cc" />
     <ClCompile Include="simsys_w32_png.cc" />
     <ClCompile Include="music\w32_midi.cc" />
-    <ClCompile Include="sound\sdl2_sound.cc" />
+    <ClCompile Include="sound\win32_sound.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="simsys_w32_png.h" />

@@ -15,9 +15,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{E74757E8-C2FD-44AD-87BD-3D55F4709484}</ProjectGuid>
+    <ProjectGuid>{0EE7EB1C-43C6-4548-9C60-B79F4D781B4C}</ProjectGuid>
     <RootNamespace>Simutrans</RootNamespace>
-    <ProjectName>Simutrans SDL2</ProjectName>
+    <ProjectName>Simutrans Server</ProjectName>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -37,8 +37,8 @@
   </ImportGroup>
   <PropertyGroup>
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
-    <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)build\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)build\Server\$(Configuration)</OutDir>
+    <IntDir>$(SolutionDir)build\Server\$(Configuration)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
     <EmbedManifest>false</EmbedManifest>
@@ -57,7 +57,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <Manifest>
@@ -68,12 +68,12 @@
     <ClCompile>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>USE_UPNP;USE_FREETYPE;COLOUR_DEPTH=16;MULTI_THREAD=1;MSG_LEVEL=3;DEBUG=3;REVISION_FROM_FILE;NOMINMAX;WIN32_LEAN_AND_MEAN;WINVER=_WIN32_WINNT_WINXP</PreprocessorDefinitions>
+      <PreprocessorDefinitions>COLOUR_DEPTH=0;MULTI_THREAD=1;MSG_LEVEL=3;DEBUG=3;REVISION_FROM_FILE;NOMINMAX;WIN32_LEAN_AND_MEAN;WINVER=_WIN32_WINNT_WINXP</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>SDL2main.lib;SDL2.lib;kernel32.lib;user32.lib;shell32.lib;winmm.lib;zlibstat.lib;advapi32.lib;ws2_32.lib;imm32.lib;libbz2.lib;libpthreadVC3d.lib;miniupnpc.lib;freetype.lib</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;shell32.lib;winmm.lib;zlibstat.lib;advapi32.lib;ws2_32.lib;imm32.lib;libbz2.lib;libpthreadVC3d.lib</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
@@ -84,12 +84,12 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
     <ClCompile>
-      <PreprocessorDefinitions>USE_UPNP;USE_FREETYPE;COLOUR_DEPTH=16;MULTI_THREAD=1;MSG_LEVEL=3;NDEBUG;REVISION_FROM_FILE;NOMINMAX;WIN32_LEAN_AND_MEAN;WINVER=_WIN32_WINNT_WINXP</PreprocessorDefinitions>
+      <PreprocessorDefinitions>COLOUR_DEPTH=0;MULTI_THREAD=1;MSG_LEVEL=3;NDEBUG;REVISION_FROM_FILE;NOMINMAX;WIN32_LEAN_AND_MEAN;WINVER=_WIN32_WINNT_WINXP</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Stable'">
     <ClCompile>
-      <PreprocessorDefinitions>USE_UPNP;USE_FREETYPE;COLOUR_DEPTH=16;MULTI_THREAD=1;MSG_LEVEL=3;NDEBUG;NOMINMAX;WIN32_LEAN_AND_MEAN;WINVER=_WIN32_WINNT_WINXP</PreprocessorDefinitions>
+      <PreprocessorDefinitions>COLOUR_DEPTH=0;MULTI_THREAD=1;MSG_LEVEL=3;NDEBUG;NOMINMAX;WIN32_LEAN_AND_MEAN;WINVER=_WIN32_WINNT_WINXP</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug' Or '$(Configuration)'=='Release'">
@@ -107,20 +107,16 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>SDL2main.lib;SDL2.lib;kernel32.lib;user32.lib;shell32.lib;winmm.lib;zlibstat.lib;advapi32.lib;ws2_32.lib;imm32.lib;libbz2.lib;libpthreadVC3.lib;miniupnpc.lib;freetype.lib</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;shell32.lib;winmm.lib;zlibstat.lib;advapi32.lib;ws2_32.lib;imm32.lib;libbz2.lib;libpthreadVC3.lib</AdditionalDependencies>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="clipboard_s2.cc" />
-    <ClCompile Include="simsys_s2.cc" />
-    <ClCompile Include="simsys_w32_png.cc" />
-    <ClCompile Include="music\w32_midi.cc" />
-    <ClCompile Include="sound\sdl2_sound.cc" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="simsys_w32_png.h" />
+    <ClCompile Include="clipboard_internal.cc" />
+    <ClCompile Include="simsys_posix.cc" />
+    <ClCompile Include="music\no_midi.cc" />
+    <ClCompile Include="sound\no_sound.cc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

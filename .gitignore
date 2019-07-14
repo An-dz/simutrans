@@ -1,29 +1,61 @@
-*.ncb
-*.suo
-*.vcproj.*
-/Debug
-/Release
-/build
-/config.*
-/makeobj/makeobj
-/makeobj/makeobj.exe
-*sim
-/sim.exe
-*.*~
-*~
+# Build dirs
 /.build
-*.orig
-*.rej
-/simutrans/*pak*
-/simutrans/pak*
-/simutrans/text
-*.bdf
+/[bB]uild
+/[dD]ebug
+/[rR]elease
+
+# Artefacts
+*.exe
+*.app
+makeobj
+sim
+
+# Ignore by default any files inside
+/simutrans/
+
+# Makefile configurations
+/config.*
+/configure
+.autom4ate.cache
+
+# Object files
+#  GCC
+*.d
+*.o
+#  Visual Studio
+*.obj
+*.iobj
+*.pch
+*.pdb
+*.ipdb
+*.pgd
+*.tlog
+ipch/
+
+# Visual Studio
+.vs/
+*.sdf
+*.sln
+*.suo
+*.vcx*
+*.vcproj*
+/revision.h
+
+# working files
+*.pak
 *.zip
-*.vcxproj
-*.vcxproj.*
-/ipch/*
-*.*sdf
+*.log
 *.diff
 *.patch
-*.log
+
+# Other files
 /doxygen
+*.rej
+*.orig
+#  Linux 
+*~
+#  MacOS
+.DS_Store
+*.xcode*
+#  Windows
+[dD]esktop.ini
