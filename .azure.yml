@@ -169,7 +169,7 @@ jobs:
           platform: 'x86'
           configuration: 'Release'
           timeoutInMinutes: 20
-          msbuildArgs: '/p:AdditionalIncludeDirectories="$(SolutionDir)include" /p:AdditionalDependencies="$(SolutionDir)lib/release" /v:diag'
+          msbuildArgs: '/p:IncludePath="$(Get-Location)\include;$env:INCLUDE" /p:LibraryPath="$(Get-Location)\lib\release;$env:LIB" /v:diag'
 
   - job:
     pool:
@@ -192,7 +192,7 @@ jobs:
           platform: 'x86'
           configuration: 'Release'
           timeoutInMinutes: 20
-          msbuildArgs: '/p:AdditionalIncludeDirectories="$(SolutionDir)include" /p:AdditionalDependencies="$(SolutionDir)lib/release" /v:diag'
+          msbuildArgs: '/p:IncludePath="$(Get-Location)\include;$env:INCLUDE" /p:LibraryPath="$(Get-Location)\lib\release;$env:LIB" /v:diag'
 
   - job:
     pool:
@@ -215,7 +215,7 @@ jobs:
           platform: 'x86'
           configuration: 'Release'
           timeoutInMinutes: 20
-          msbuildArgs: '/p:AdditionalIncludeDirectories="$(SolutionDir)include" /p:AdditionalDependencies="$(SolutionDir)lib/release" /v:diag'
+          msbuildArgs: '/p:IncludePath="$(Get-Location)\include;$env:INCLUDE" /p:LibraryPath="$(Get-Location)\lib\release;$env:LIB" /v:diag'
 
   - job:
     pool:
@@ -238,7 +238,7 @@ jobs:
           platform: 'x86'
           configuration: 'Release'
           timeoutInMinutes: 20
-          msbuildArgs: '/p:AdditionalIncludeDirectories="$(SolutionDir)include" /p:AdditionalDependencies="$(SolutionDir)lib/release" /v:diag'
+          msbuildArgs: '/p:IncludePath="$(Get-Location)\include;$env:INCLUDE" /p:LibraryPath="$(Get-Location)\lib\release;$env:LIB" /v:diag'
 
   # Windows MinGW GCC
   ###############################################
