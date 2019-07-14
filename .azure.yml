@@ -157,8 +157,9 @@ jobs:
         fetchDepth: 1
       - pwsh: |
           (New-Object System.Net.WebClient).DownloadFile("https://zanghelini.com/simutrans/VisualStudioDependencies.7z", "VisualStudioDependencies.7z")
-        displayName: Install Dependencies
+        displayName: Download Dependencies
       - task: ExtractFiles@1
+        displayName: Install Dependencies
         inputs:
           archiveFilePatterns: 'VisualStudioDependencies.7z'
           cleanDestinationFolder: false
@@ -168,7 +169,7 @@ jobs:
           platform: 'x86'
           configuration: 'Release'
           timeoutInMinutes: 20
-          msbuildArgs: '/p:IncludePath=$(SolutionDir)include;LibraryPath=$(SolutionDir)lib/release'
+          msbuildArgs: '/p:IncludePath="$(SolutionDir)include;$(IncludePath)";LibraryPath="$(SolutionDir)lib/release;$(LibraryPath)"'
 
   - job:
     pool:
@@ -179,7 +180,7 @@ jobs:
         fetchDepth: 1
       - pwsh: |
           (New-Object System.Net.WebClient).DownloadFile("https://zanghelini.com/simutrans/VisualStudioDependencies.7z", "VisualStudioDependencies.7z")
-        displayName: Install Dependencies
+        displayName: Download Dependencies
       - task: ExtractFiles@1
         inputs:
           archiveFilePatterns: 'VisualStudioDependencies.7z'
@@ -190,7 +191,7 @@ jobs:
           platform: 'x86'
           configuration: 'Release'
           timeoutInMinutes: 20
-          msbuildArgs: '/p:IncludePath=$(SolutionDir)include;LibraryPath=$(SolutionDir)lib/release'
+          msbuildArgs: '/p:IncludePath="$(SolutionDir)include;$(IncludePath)";LibraryPath="$(SolutionDir)lib/release;$(LibraryPath)"'
 
   - job:
     pool:
@@ -201,7 +202,7 @@ jobs:
         fetchDepth: 1
       - pwsh: |
           (New-Object System.Net.WebClient).DownloadFile("https://zanghelini.com/simutrans/VisualStudioDependencies.7z", "VisualStudioDependencies.7z")
-        displayName: Install Dependencies
+        displayName: Download Dependencies
       - task: ExtractFiles@1
         inputs:
           archiveFilePatterns: 'VisualStudioDependencies.7z'
@@ -212,7 +213,7 @@ jobs:
           platform: 'x86'
           configuration: 'Release'
           timeoutInMinutes: 20
-          msbuildArgs: '/p:IncludePath=$(SolutionDir)include;LibraryPath=$(SolutionDir)lib/release'
+          msbuildArgs: '/p:IncludePath="$(SolutionDir)include;$(IncludePath)";LibraryPath="$(SolutionDir)lib/release;$(LibraryPath)"'
 
   - job:
     pool:
@@ -223,7 +224,7 @@ jobs:
         fetchDepth: 1
       - pwsh: |
           (New-Object System.Net.WebClient).DownloadFile("https://zanghelini.com/simutrans/VisualStudioDependencies.7z", "VisualStudioDependencies.7z")
-        displayName: Install Dependencies
+        displayName: Download Dependencies
       - task: ExtractFiles@1
         inputs:
           archiveFilePatterns: 'VisualStudioDependencies.7z'
@@ -234,7 +235,7 @@ jobs:
           platform: 'x86'
           configuration: 'Release'
           timeoutInMinutes: 20
-          msbuildArgs: '/p:IncludePath=$(SolutionDir)include;LibraryPath=$(SolutionDir)lib/release'
+          msbuildArgs: '/p:IncludePath="$(SolutionDir)include;$(IncludePath)";LibraryPath="$(SolutionDir)lib/release;$(LibraryPath)"'
 
   # Windows MinGW GCC
   ###############################################
