@@ -31,6 +31,8 @@
     <_ProjectFileVersion>16.0.28916.169</_ProjectFileVersion>
     <OutDir>$(SolutionDir)..\build\makeobj\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\build\makeobj\$(Configuration)\</IntDir>
+    <IncludePath>$(SimIncludePath);$(IncludePath)</IncludePath>
+    <LibraryPath>$(SimLibraryPath);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>

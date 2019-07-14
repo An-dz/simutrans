@@ -164,15 +164,12 @@ jobs:
           archiveFilePatterns: 'VisualStudioDependencies.7z'
           cleanDestinationFolder: false
       - task: VSBuild@1
-        env:
-          INCLUDE: 'include;$env:INCLUDE'
-          LIB: 'lib\release;$env:LIB'
+        timeoutInMinutes: 20
         inputs:
           solution: 'Simutrans-GDI.vcxproj'
           platform: 'x86'
           configuration: 'Release'
-          timeoutInMinutes: 20
-          msbuildArgs: '/v:diag'
+          msbuildArgs: '/p:SimIncludePath=include /p:SimLibraryPath=lib\release'
 
   - job:
     pool:
@@ -190,15 +187,12 @@ jobs:
           archiveFilePatterns: 'VisualStudioDependencies.7z'
           cleanDestinationFolder: false
       - task: VSBuild@1
-        env:
-          INCLUDE: 'include;$env:INCLUDE'
-          LIB: 'lib\release;$env:LIB'
+        timeoutInMinutes: 20
         inputs:
           solution: 'Simutrans-SDL2.vcxproj'
           platform: 'x86'
           configuration: 'Release'
-          timeoutInMinutes: 20
-          msbuildArgs: '/v:diag'
+          msbuildArgs: '/p:SimIncludePath=include /p:SimLibraryPath=lib\release'
 
   - job:
     pool:
@@ -216,15 +210,12 @@ jobs:
           archiveFilePatterns: 'VisualStudioDependencies.7z'
           cleanDestinationFolder: false
       - task: VSBuild@1
-        env:
-          INCLUDE: 'include;$env:INCLUDE'
-          LIB: 'lib\release;$env:LIB'
+        timeoutInMinutes: 20
         inputs:
           solution: 'Simutrans-Server.vcxproj'
           platform: 'x86'
           configuration: 'Release'
-          timeoutInMinutes: 20
-          msbuildArgs: '/v:diag'
+          msbuildArgs: '/p:SimIncludePath=include /p:SimLibraryPath=lib\release'
 
   - job:
     pool:
@@ -242,15 +233,12 @@ jobs:
           archiveFilePatterns: 'VisualStudioDependencies.7z'
           cleanDestinationFolder: false
       - task: VSBuild@1
-        env:
-          INCLUDE: 'include;$env:INCLUDE'
-          LIB: 'lib\release;$env:LIB'
+        timeoutInMinutes: 20
         inputs:
           solution: 'makeobj/Makeobj.sln'
           platform: 'x86'
           configuration: 'Release'
-          timeoutInMinutes: 20
-          msbuildArgs: '/v:diag'
+          msbuildArgs: '/p:SimIncludePath=..\include /p:SimLibraryPath=..\lib\release'
 
   # Windows MinGW GCC
   ###############################################
