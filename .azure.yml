@@ -164,13 +164,13 @@ jobs:
           archiveFilePatterns: 'VisualStudioDependencies.7z'
           cleanDestinationFolder: false
       - task: VSBuild@1
+        env:
+          INCLUDE: 'include;$env:INCLUDE'
+          LIB: 'lib\release;$env:LIB'
         inputs:
           solution: 'Simutrans-GDI.vcxproj'
           platform: 'x86'
           configuration: 'Release'
-          env:
-            INCLUDE: 'include;$env:INCLUDE'
-            LIB: 'lib\release;$env:LIB'
           timeoutInMinutes: 20
           msbuildArgs: '/v:diag'
 
@@ -190,13 +190,13 @@ jobs:
           archiveFilePatterns: 'VisualStudioDependencies.7z'
           cleanDestinationFolder: false
       - task: VSBuild@1
+        env:
+          INCLUDE: 'include;$env:INCLUDE'
+          LIB: 'lib\release;$env:LIB'
         inputs:
           solution: 'Simutrans-SDL2.vcxproj'
           platform: 'x86'
           configuration: 'Release'
-          env:
-            INCLUDE: 'include;$env:INCLUDE'
-            LIB: 'lib\release;$env:LIB'
           timeoutInMinutes: 20
           msbuildArgs: '/v:diag'
 
@@ -216,13 +216,13 @@ jobs:
           archiveFilePatterns: 'VisualStudioDependencies.7z'
           cleanDestinationFolder: false
       - task: VSBuild@1
+        env:
+          INCLUDE: 'include;$env:INCLUDE'
+          LIB: 'lib\release;$env:LIB'
         inputs:
           solution: 'Simutrans-Server.vcxproj'
           platform: 'x86'
           configuration: 'Release'
-          env:
-            INCLUDE: 'include;$env:INCLUDE'
-            LIB: 'lib\release;$env:LIB'
           timeoutInMinutes: 20
           msbuildArgs: '/v:diag'
 
@@ -242,13 +242,13 @@ jobs:
           archiveFilePatterns: 'VisualStudioDependencies.7z'
           cleanDestinationFolder: false
       - task: VSBuild@1
+        env:
+          INCLUDE: 'include;$env:INCLUDE'
+          LIB: 'lib\release;$env:LIB'
         inputs:
           solution: 'makeobj/Makeobj.sln'
           platform: 'x86'
           configuration: 'Release'
-          env:
-            INCLUDE: 'include;$env:INCLUDE'
-            LIB: 'lib\release;$env:LIB'
           timeoutInMinutes: 20
           msbuildArgs: '/v:diag'
 
