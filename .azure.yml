@@ -169,7 +169,7 @@ jobs:
           platform: 'x86'
           configuration: 'Release'
           timeoutInMinutes: 20
-          msbuildArgs: '/p:IncludePath="$(SolutionDir)include;$(IncludePath)" /p:LibraryPath="$(SolutionDir)lib/release;$(LibraryPath)" /v:diag'
+          msbuildArgs: '/p:IncludePath="$(SolutionDir)include;$(VC_IncludePath);$(WindowsSDK_IncludePath)" /p:LibraryPath="$(SolutionDir)lib/release;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)" /v:diag'
 
   - job:
     pool:
@@ -192,7 +192,7 @@ jobs:
           platform: 'x86'
           configuration: 'Release'
           timeoutInMinutes: 20
-          msbuildArgs: '/p:IncludePath="$(SolutionDir)include;$(IncludePath)" /p:LibraryPath="$(SolutionDir)lib/release;$(LibraryPath)" /v:diag'
+          msbuildArgs: '/p:IncludePath="$(SolutionDir)include;$(VC_IncludePath);$(WindowsSDK_IncludePath)" /p:LibraryPath="$(SolutionDir)lib/release;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)" /v:diag'
 
   - job:
     pool:
@@ -215,7 +215,7 @@ jobs:
           platform: 'x86'
           configuration: 'Release'
           timeoutInMinutes: 20
-          msbuildArgs: '/p:IncludePath="$(SolutionDir)include;$(IncludePath)" /p:LibraryPath="$(SolutionDir)lib/release;$(LibraryPath)" /v:diag'
+          msbuildArgs: '/p:IncludePath="$(SolutionDir)include;$(VC_IncludePath);$(WindowsSDK_IncludePath)" /p:LibraryPath="$(SolutionDir)lib/release;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)" /v:diag'
 
   - job:
     pool:
@@ -238,7 +238,7 @@ jobs:
           platform: 'x86'
           configuration: 'Release'
           timeoutInMinutes: 20
-          msbuildArgs: '/p:IncludePath="$(SolutionDir)include;$(IncludePath)" /p:LibraryPath="$(SolutionDir)lib/release;$(LibraryPath)" /v:diag'
+          msbuildArgs: '/p:IncludePath="$(SolutionDir)include;$(VC_IncludePath);$(WindowsSDK_IncludePath)" /p:LibraryPath="$(SolutionDir)lib/release;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)" /v:diag'
 
   # Windows MinGW GCC
   ###############################################
