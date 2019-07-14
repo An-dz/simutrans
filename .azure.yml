@@ -169,6 +169,7 @@ jobs:
           platform: 'x86'
           configuration: 'Release'
           timeoutInMinutes: 20
+          logFileVerbosity: diagnostic
           msbuildArgs: '/p:IncludePath=\"$(SolutionDir)include;$(IncludePath)\";LibraryPath=\"$(SolutionDir)lib/release;$(LibraryPath)\"'
 
   - job:
@@ -192,6 +193,7 @@ jobs:
           platform: 'x86'
           configuration: 'Release'
           timeoutInMinutes: 20
+          logFileVerbosity: diagnostic
           msbuildArgs: '/p:IncludePath="$(SolutionDir)include%3B$(IncludePath)";LibraryPath="$(SolutionDir)lib/release%3B$(LibraryPath)"'
 
   - job:
@@ -215,6 +217,7 @@ jobs:
           platform: 'x86'
           configuration: 'Release'
           timeoutInMinutes: 20
+          logFileVerbosity: diagnostic
           msbuildArgs: '/p:IncludePath="$(SolutionDir)include%3B$(IncludePath)";LibraryPath="$(SolutionDir)lib/release%3B$(LibraryPath)"'
 
   - job:
@@ -238,6 +241,7 @@ jobs:
           platform: 'x86'
           configuration: 'Release'
           timeoutInMinutes: 20
+          logFileVerbosity: diagnostic
           msbuildArgs: '/p:IncludePath="$(SolutionDir)include;$(IncludePath)";LibraryPath="$(SolutionDir)lib/release;$(LibraryPath)"'
 
   # Windows MinGW GCC
