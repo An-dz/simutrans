@@ -1,6 +1,6 @@
 **ATTENTION**
 
-We do not take pull requests on GitHub.
+We do not take pull requests on GitHub. Our Git repository is merely a mirror.
 
 Our repository is on SVN and patches must be sent to our [forums][1].
 
