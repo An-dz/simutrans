@@ -13,11 +13,42 @@ Makeobj is a command line tool to create new objects for Simutrans. It
 joins image and data files into a single optimised pak-file that can be
 used on Simutrans.
 
+A Makefile and a Visual Studio solution are available in its directory.
+
+# Contributing
+
+The files `about-the-code.txt` and `coding_styles.txt` can give you a
+head start on some quirks about the code and how you should style your
+code.
+
+Simutrans can accept any contribution as long as the core of the game,
+being transportation simulation, is not reduced.
+
+When sending pull requests we ask for small patches doing small things
+at a time, even if it's part of a large project. The chances of your
+code being merged are heavily boosted if you do so.
+
+It's very common for long discussions about your patch to happen and
+many change requests to follow, and even if you follow everything it
+might still be denied. But don't take this harshly, we try to keep the
+gameplay simple and intuitive for any player and the complexity of your
+patch can be one of the reasons it did not make into the master branch.
+Consensus is also another big factor on the future of a patch.
+
 # How to compile
 
 The instructions below expect that you at least know what the tools are
 and what they do, as well as how to obtain the source code. They also
 only point to a minimum easy compiling and not the bare-minimum.
+
+The compiling will only generate the Simutrans executable, you still
+need to have a [pakset](https://www.simutrans.com/paksets) and the
+files that are available in the `simutrans` directory to actually run
+the game.
+
+You can use the `-use_workdir <path>` flag to let the executable know
+where the `simutrans` directory is located so it can load the pakset
+and the other needed files.
 
 ## Dependencies
 
@@ -38,8 +69,8 @@ you don't need to install any back-end library.
 On Windows you can compile with GDI back-end and it does not require
 any library to be installed as it comes with any compilation system.
 
-For the recommended SDL2 back-end you need:
-- libSDL2 <http://www.libsdl.org/>
+For the SDL2 back-end you need:
+- libSDL2 <https://www.libsdl.org/>
 - libSDL2_mixer (link from the same page)  
   This is if you want sound support.
 
@@ -51,9 +82,9 @@ Allegro support is also available but it lacks maintenance:
 
 ### Optional
 
-- libfreetype <http://www.freetype.org/>  
+- libfreetype <https://www.freetype.org/>  
   For scalable font support. (Recommended for High DPI screens)
-- libminiupnpc <http://miniupnp.free.fr/>  
+- libminiupnpc <https://miniupnp.tuxfamily.org/>  
   For easily creating new servers with a single click.
 
 ## Linux
@@ -80,37 +111,84 @@ Microsoft offers a free version of Visual Studio called Community for
 open-source, academic and one-man development that can be downloaded
 [here](https://visualstudio.microsoft.com/vs/community/).
 
+Our solution and project files are fully compatible with any version of
+Visual Studio 2013 Update 2 or newer. Visual Studio 2012 can also open
+it after accepting the conversion dialogue that opens when you load it
+for the first time. Older versions will not work.
+
 For the bare-minimum you need to install these individual components:
-- Any C++ build tools for MSVC  
+- Any VC++ build tools for MSVC  
   You can choose the latest version
 - Any Windows 10 SDK  
   Works on Windows 7 and 8
-- Main C++ Resources
+- C++ Core Features
+  Can also be named as Main Resources
+- Re distributable package
+  Needed to run but not required if you already have it installed
 
 Or you can choose the _Game Development with C++_ workload, though it
-will install some unnecessary packages.
+will install some unnecessary packages as well.
 
 Along with the dependencies already listed Visual Studio builds also
 requires the Windows version of pthread which is available at
 <https://sourceforge.net/projects/pthreads4w/>.
 
 A package with all dependencies pre-compiled can be downloaded from our
-[forum](). You can also compile them by yourself.
+[forum](https://forum.simutrans.com/index.php?topic=14226.0). You can
+also compile them by yourself, the same link has important information
+about compiling the dependencies.
 
-The _Simutrans.sln_ file compiles for the GDI back-end, while the
-_Simutrans-SDL2.sln_ file compiles, obviously, for the SDL2 back-end.
-By default both have _miniupnpc_ and _freetype_ enabled, change the
-pre-processor directives if you don't want them.
+The _Simutrans.sln_ file contains the projects for compiling with GDI
+and SDL2 back-ends as well as a Server configuration for running on the
+command line. By default GDI and SDL2 have _miniupnpc_ and _freetype_
+enabled, change the pre-processor directives and linked libraries if
+you don't want them.
+
+Once you have the dependencies in place open the _Simutrans.sln_ file.
+There are three compiling configurations:
+- **Debug** is for development, it generates a non-optimised code with
+debugging capabilities;
+- **Stable** generates a stable build, you should only use this with
+the sources of the stable release;
+- **Release** is just like Stable but it adds commit information for
+servers that don't want to run stable.
+
+Once you choose your option, right-click over one of the projects, like
+_Simutrans GDI_, and open the _Properties_. Make sure you are editing
+the configuration you want and under **VC++ Directories** you should
+add the _Include_ and _Library_ paths where the dependencies are
+located so VS can use them.
+
+Under **C/C++ -> Preprocessor** you can edit upnp and freetype support.
+For removing them from being linked remove them under **Linker ->
+Input**.
 
 ### Visual Studio Build Tools
 
 The [build tools](https://visualstudio.microsoft.com/downloads/) only
 installs the needed components for compiling with the command line.
-This option, like the MSYS2 option, can be used to work with Visual
-Studio Code or SublimeText.
 
-Follow the instruction from [Visual Studio](#visual-studio). They can
-differ in some small points though.
+Read the instruction from [Visual Studio](#visual-studio), they explain
+the basics about the configurations, options and dependencies.
+
+Once you have the build tools installed check your Start Menu for an
+item titled **Developer Command Prompt** this will open the Command
+Prompt with all paths already set up. Navigate to the Simutrans folder
+and pass the project you want to build. Passing the _Simutrans.sln_
+file to MSBuild will compile all three versions (GDI, SDL2, Server), to
+compile only one version pass the _.vcxproj_ file instead.
+
+For passing extra include and library paths, needed to tell where the
+required libraries are located, use parameters _SimIncludePath_ and
+_SimLibraryPath_.
+
+The following will compile a _Stable_ version telling the libraries
+headers are available in `<CurrentDir>\include\` and the lib files are
+in `<CurrentDir>\lib\`.
+
+```powershell
+MSBuild Simutrans-GDI.vcxproj /c:Stable /p:SimIncludePath=include /p:SimLibraryPath=lib
+```
 
 ### MSYS2 + MinGW
 
@@ -118,7 +196,7 @@ differ in some small points though.
 system for compiling on Windows with GCC. It's entirely used on the
 command line.
 
-You can install the [Dependencies](#dependencies) with _pacman_, these
+You can install the [dependencies](#dependencies) with _pacman_, these
 are the name of the packages:
 - mingw-w64-i686-zlib
 - mingw-w64-i686-bzip2
@@ -159,7 +237,8 @@ manager for MacOS. The package names of the dependencies are:
 - miniupnpc
 - libpng
 
-zlib and bzip2 are already installed so installing the brew version is only for using a more up-to-date version. You'll have to manually edit
+zlib and bzip2 are already installed so installing the brew version is
+only for using a more up-to-date version. You'll have to manually edit
 the build to use these newer versions of the lib.
 
 Other packages you'll need are:
@@ -174,9 +253,14 @@ autoconf
 make
 ```
 
+On MacOS Simutrans uses AVFoundation for media capabilities. This comes
+by default with XCode (Homebrew installs it) on MacOS 10.7+ (Lion). For
+older systems Simutrans will use QuickTime (also comes with Xcode), but
+this back-end is deprecated.
+
 ## FreeBSD
 
-You can install all [Dependencies](#dependencies) with FreeBSD package
+You can install all [dependencies](#dependencies) with FreeBSD package
 manager _pkg_. The name of the packages are:
 - lzlib
 - bzip2
@@ -200,83 +284,18 @@ autoconf
 gmake
 ```
 
+### Other BSD
+
+Simutrans configure script is set up to offer Haiku support and is
+known to compile without problems on it. You may need to install
+_libtool_ to compile with static linking.
+
+Other BSD systems, like OpenBSD, should fallback to using the FreeBSD
+settings and should compile without problems as well.
+
 ## Server
 
 If you want to compile Simutrans as a command line tool, for hosting a
 server without graphical back-end, with GCC just call `configure` with
-`--enable-server`. For Visual Studio use the _Simutrans-server.sln_ file.
-
-
-Congratulations, you checked out the simutrans source. To compile it,
-you have many options, either using Microsoft Visual C++ Express (which
-is free in Version 7.0 or up) or some GCC variant including clang.
-
-
-To make life easier, you can follow the instructions to compile OpenTTD:
-http://wiki.openttd.org/Category:Compiling_OpenTTD
-A system set up for OpenTTD will also compile simutrans (except for
-bzlib2, see below sections).
-
-If you are on a MS Windows machine, download either MS VC Express or
-MSYS2. MSVC is easy for debugging, MSYS2 is easy to set up (but it has to 
-
-
-To built on Haiku you must use GCC4 (type "setarch x86" in the current
-nightlies). To incorporate bz2lib, download make bz2lib and add them
-manually (via FLAGS = -I/dwonloadeddir -L/downloadeddir). However, simutrans
-has a Haikuporter package, which may built the lastest version.
-
-A subversion will be also a good idea. You can find some of them on:
-http://subversion.tigris.org/
-or you some other client.
-
-Check out the latest source from the SVN or check out a certain revision.
-I recommend always to use the latest source, since it does not make any
-sense to work with buggy code.
-
-The address is:
-svn://servers.simutrans.org/simutrans
-
-A commandline would look like this:
-svn checkout svn://servers.simutrans.org/simutrans
-
-If everything is set up, you can run configure inside trunk. This should 
-create a config.default file with all the needed settings. Try to compile 
-using make. You can manually fine edit config.default to enable other 
-settings.
-
-Typical you type into a command window:
-./configure
-make
-
-The executable compiled by this is located in the directory "build/default", 
-i.e. "./build/default/sim" You can start it by this
-cd simutrans
-../build/default/sim -use_workdir
-but you will need to add at least one pak to the simutrans directory.
-
-You can run ./distribute which will give you a zip file that contains 
-everything (minus a pak) needed to run simutrans.
-
-
-IMPORTANT:
-----------
-
-If you want to contribute, read the coding guidelines in
-trunk/coding_styles.txt
-
-
-The following instructions are manual setup for GCC systems:
-------------------------------------------------------------
-
-Finally type make. If you want a smaller program and do not care about error
-messages, you can comment out #DEBUG=1 and run strip sim resp. strip sim.exe
-after compile and linking.
-
-
-The following instructions are for MS Visual C Express:
--------------------------------------------------------
-
-For debugging, you have to set the correct working directory, i.e. the
-directory where the pak/ folders are located and use the -use_workdir
-command line option.
+`--enable-server`. For Visual Studio compile the **Simutrans Server**
+project inside the _Simutrans.sln_ file.

@@ -1,8 +1,6 @@
 # Cirrus CI for FreeBSD builds
-
 env:
   CIRRUS_CLONE_DEPTH: 1
-
 
 task:
   only_if: $CIRRUS_BRANCH == 'master'
@@ -16,15 +14,151 @@ task:
     - name: FreeBSD SDL2 Build
       build_script:
         - pkg install -y sdl2 sdl2_mixer freetype2 miniupnpc
-        - autoconf && ./configure
+        - autoconf
+        - ./configure
         - gmake -j
     - name: FreeBSD Server Build
       build_script:
-        - autoconf && ./configure --enable-server
+        - autoconf
+        - ./configure --enable-server
         - gmake -j
     - name: FreeBSD Makeobj Build
       build_script:
         - pkg install -y png pkgconf
-        - autoconf && ./configure
+        - autoconf
+        - ./configure
         - cd makeobj
         - gmake -j
+
+
+
+
+# There's no need to compile if no source files were changed
+# compile_check:
+  # only_if: changesInclude('*.txt', '*.md', 'simutrans/*', 'documentation/*', 'nsis/*', 'themes.src/*', 'translate_code/*')
+
+# don't compile makeobj if no changes were made on its files
+makeobj_compile_check: &MAKEOBJ_COMPILE_CHECK
+  only_if: changesInclude('.cirrus.yml', 'makeobj/*', 'descriptor/writer/*', 'utils/dr_rdpng.cc', 'utils/log.cc', 'descriptor/image.cc', 'dataobj/freelist.cc', 'dataobj/tabfile.cc', 'simdebug.cc', 'simmem.cc', 'utils/simstring.cc', 'utils/searchfolder.cc')
+
+# Linux
+task:
+  container:
+    image: gcc:latest
+  dependency_script:
+    - apt-get update
+    - apt-get -qq install zlib1g-dev libbz2-dev autoconf
+  matrix:
+    - name: Linux SDL2 Build
+      build_script:
+        - apt-get -qq install libsdl2-dev libsdl2-mixer-dev libfreetype6-dev libminiupnpc-dev
+        - autoconf && ./configure
+        - make
+    - name: Linux Server Build
+      build_script:
+        - autoconf && ./configure --enable-server
+        - make
+    - name: Linux Makeobj Build
+      << : *MAKEOBJ_COMPILE_CHECK
+      build_script:
+        - apt-get -qq install libpng-dev pkg-config
+        - autoconf && ./configure
+        - cd makeobj
+        - make
+
+# Windows
+task:
+  windows_container:
+    image: cirrusci/windowsservercore:2019
+    os_version: 2019
+  env:
+    CIRRUS_SHELL: powershell
+  dependency_script:
+    - $msys2 = (Get-Location).Drive.Root + "msys64"
+    - git clone --depth 1 https://github.com/msys2/msys2-ci-base.git $msys2
+    - $env:PATH = $msys2;$env:PATH
+    - pacman -Syu --noconfirm --noprogressbar
+    - pacman -Su --noconfirm --noprogressbar mingw-w64-i686-zlib mingw-w64-i686-bzip2 autoconf mingw-w64-i686-gcc make
+    # - (New-Object System.Net.WebClient).DownloadFile("", "BuildTools.exe")
+  matrix:
+    - name: Windows MinGW SDL2 Build
+      build_script:
+        - pacman -S --noconfirm --noprogressbar mingw-w64-i686-SDL2 mingw-w64-i686-SDL2_mixer mingw-w64-i686-freetype mingw-w64-i686-miniupnpc
+        - autoconf && ./configure
+        - make
+    - name: Windows MinGW GDI Build
+      build_script:
+        - pacman -S --noconfirm --noprogressbar mingw-w64-i686-freetype mingw-w64-i686-miniupnpc
+        - autoconf && ./configure
+        - make
+    - name: Windows MinGW Server Build
+      build_script:
+        - autoconf && ./configure --enable-server
+        - make
+    - name: Windows MinGW Makeobj Build
+      << : *MAKEOBJ_COMPILE_CHECK
+      build_script:
+        - pacman -S --noconfirm --noprogressbar mingw-w64-i686-libpng mingw-w64-i686-pkg-config
+        - autoconf && ./configure
+        - cd makeobj
+        - make
+
+# MacOS
+task:
+  osx_instance:
+    image: mojave-xcode-10.2
+  dependency_script:
+    - ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    - brew install autoconf
+  matrix:
+    - name: MacOS SDL2 Build
+      build_script:
+        - brew install sdl2 sdl2_mixer freetype miniupnpc
+        - autoconf && ./configure
+        - make
+    - name: MacOS Server Build
+      build_script:
+        - autoconf && ./configure --enable-server
+        - make
+    - name: MacOS Makeobj Build
+      << : *MAKEOBJ_COMPILE_CHECK
+      build_script:
+        - brew install libpng pkg-config
+        - autoconf && ./configure
+        - cd makeobj
+        - make
+
+# FreeBSD
+task:
+  freebsd_instance:
+    image: freebsd-12-0-release-amd64
+  dependency_script:
+    - pkg install -y lzlib bzip2 autoconf gcc gmake
+  matrix:
+    - name: FreeBSD SDL2 Build
+      build_script:
+        - pkg install -y sdl2 sdl2_mixer freetype2 miniupnpc
+        - autoconf && ./configure
+        - gmake
+    - name: FreeBSD Server Build
+      build_script:
+        - autoconf && ./configure --enable-server
+        - gmake
+    - name: FreeBSD Makeobj Build
+      << : *MAKEOBJ_COMPILE_CHECK
+      build_script:
+        - pkg install -y png pkgconf
+        - autoconf && ./configure
+        - cd makeobj
+        - gmake
+
+# VS
+#   sdl2
+#   gdi
+#   server
+#   makeobj
+# mingw
+#   sdl2
+#   gdi
+#   server
+#   makeobj
