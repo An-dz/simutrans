@@ -121,9 +121,9 @@ For the bare-minimum you need to install these individual components:
   You can choose the latest version
 - Any Windows 10 SDK  
   Works on Windows 7 and 8
-- C++ Core Features
-  Can also be named as Main Resources
-- Re distributable package
+- C++ Core Features  
+  May also be named as C++ Main Resources depending on your language
+- Re-distributable package  
   Needed to run but not required if you already have it installed
 
 Or you can choose the _Game Development with C++_ workload, though it
